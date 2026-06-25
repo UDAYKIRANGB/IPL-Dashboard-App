@@ -1,0 +1,56 @@
+.match-list-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #0f172a;
+  width: 45%;
+  border-radius: 12px;
+  color: #ffffff;
+  font-family: 'Bree Serif';
+  font-weight: 500;
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-right: 15px;
+  margin-bottom: 20px;
+}
+
+.match-details-img {
+  width: 50px;
+  height: 50px;
+}
+
+.match-details-name {
+  font-size: 18px;
+  margin-bottom: 0px;
+}
+
+.match-details-para {
+  font-size: 12px;
+  margin-bottom: 0px;
+}
+
+.Won {
+  color: #18ed66;
+  font-size: 14px;
+}
+
+.Loss {
+  color: #e31a1a;
+  font-size: 16px;
+}
+
+@media (min-width: 768px) {
+  .match-list-details {
+    width: 32%;
+    margin-right: 10px;
+  }
+  .match-details-img {
+    height: 150px;
+    width: 150px;
+  }
+  .match-details-name {
+    font-size: 24px;
+  }
+}
