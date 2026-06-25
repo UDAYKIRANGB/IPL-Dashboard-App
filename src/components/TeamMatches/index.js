@@ -1,4 +1,14 @@
 import {Component} from 'react'
+import {Link} from 'react-router-dom'
+import {
+  PieChart,
+  Pie,
+  Cell,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from 'recharts'
+
 import Loader from 'react-loader-spinner'
 import LatestMatch from '../LatestMatch'
 import MatchCard from '../MatchCard'
@@ -70,6 +80,22 @@ class TeamMatches extends Component {
     const {match} = this.props
     const {params} = match
     const {id} = params
+
+    const won = recentMatches.filter(m => m.matchStatus === 'Won').length
+    const lost = recentMatches.filter(m => m.matchStatus === 'Lost').length
+    const draw = recentMatches.filter(m => m.matchStatus === 'Draw').length
+
+    console.log(won)
+    console.log(recentMatches.map(m => m.matchStatus))
+
+    const pieData = [
+      {name: 'Won', value: won},
+      {name: 'Lost', value: lost},
+      {name: 'Draw', value: draw},
+    ]
+
+    const COLORS = ['#0088FE', '#FF8042', '##FFBB28']
+
     return (
       <div>
         {isActive ? (
@@ -90,6 +116,34 @@ class TeamMatches extends Component {
                 <MatchCard recentMatchesDetails={each} key={each.id} />
               ))}
             </ul>
+            <h1 className="stats-heading">Match Statistics</h1>
+            <div className="stats-container">
+              <ResponsiveContainer width="100%" height={300}>
+                <PieChart>
+                  <Pie
+                    data={pieData}
+                    dataKey="value"
+                    nameKey="name"
+                    outerRadius={100}
+                    label
+                  >
+                    {pieData.map((entry, index) => (
+                      <Cell
+                        key={entry.name}
+                        fill={COLORS[index % COLORS.length]}
+                      />
+                    ))}
+                  </Pie>
+                  <Tooltip />
+                  <Legend />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+            <Link to="/" className="link">
+              <button type="button" className="back-button">
+                Back
+              </button>
+            </Link>
           </div>
         )}
       </div>
